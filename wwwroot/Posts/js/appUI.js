@@ -248,7 +248,8 @@ function newPost() {
     Post = {};
     Post.Id = 0;
     Post.Title = "";
-    Post.Url = "";
+    Post.Image = "";
+    Post.Text = "";
     Post.Category = "";
     return Post;
 }
@@ -293,23 +294,25 @@ function renderPostForm(Post = null) {
             <input 
                 class="form-control Alpha"
                 name="Image" 
-                id="Image" 
-                placeholder="Image"
+                id="Image"
+                type="file"
+                src="./image_placeholder.png"
                 required
                 RequireMessage="Veuillez entrer une image"
                 InvalidMessage="L'image comporte un caractère illégal"
                 value="${Post.Image}"
             />
-            <input 
+            <textarea
                 class="form-control Alpha"
                 name="Text" 
-                id="Text" 
-                placeholder="Text"
+                id="Text"
+                rows="10"
+                placeholder="Texte"
                 required
                 RequireMessage="Veuillez entrer un texte"
                 InvalidMessage="Le texte comporte un caractère illégal"
                 value="${Post.Text}"
-            />
+            ></textarea>
             <br>
             <input type="submit" value="Enregistrer" id="savePost" class="btn btn-primary">
             <input type="button" value="Annuler" id="cancel" class="btn btn-secondary">
