@@ -41,7 +41,7 @@ async function Init_UI() {
     start_Periodic_Refresh();
 }
 function showPosts() {
-    $("#actionTitle").text("Liste des favoris");
+    $("#actionTitle").text("Fil de nouvelles");
     $("#scrollPanel").show();
     $('#abort').hide();
     $('#postForm').hide();
