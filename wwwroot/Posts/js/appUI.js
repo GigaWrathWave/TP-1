@@ -346,11 +346,11 @@ function renderPost(Post) {
         <div class="PostContainer noselect">
             <div class="PostLayout">
                 <div class="Post">
+                    <span class="PostCategory">${Post.Category}</span>
                     <span class="PostTitle">${Post.Title}</span>
-                    <a href="${Post.Image}" target="_blank"> ${favicon} </a>
-                    <span class="PostCreation">${Post.Creation}</span>
+                    <img src="${Post.Image}" alt="Girl in a jacket" width="500" height="600">
+                    <span class="PostCreation">${convertToFrenchDate(Post.Creation)}</span>
                 </div>
-                <span class="PostCategory">${Post.Category}</span>
             </div>
             <div class="PostCommandPanel">
                 <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}" title="Modifier ${Post.Title}"></span>
