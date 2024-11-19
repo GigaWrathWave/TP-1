@@ -3,13 +3,13 @@
     padding-left:5px;
     padding-bottom:5px;
     padding-right: 10px;
+    width: 300px;
     height: 32px !important;
     vertical-align: middle;
 }
 
 #search {
-    display:grid;
-    width: 190px;
-    grid-template-columns: 155px 30px;
+    display:flex;
+    width: 100%;
     align-items: center;
 }
