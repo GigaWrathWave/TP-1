@@ -357,6 +357,7 @@ function renderPost(Post) {
                     <br/>
                     <span class="paragraphe">${Post.Text}</span>
                 </div>
+                <hr>
             </div>
             <div class="PostCommandPanel">
                 <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}" title="Modifier ${Post.Title}"></span>

@@ -31,18 +31,20 @@
 .Post {
     display: grid;
     grid-template-rows: 30px auto;
+    gap: 20px
 }
 
 .PostTitle {
     font-size: 1.1rem;
     font-weight: bold;
     color: black;
-    font-size: large;
+    font-size: x-large;
 }
 
 .PostCategory {
     color: dodgerblue !important;
     font-weight: bold;
+    font-size: xx-large;
 }
 
 .PostCreation {
