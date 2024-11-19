@@ -9,7 +9,7 @@ function Init_UI() {
         width: $("#sample").outerWidth(),
         height: $("#sample").outerHeight()
     };
-    pageManager = new PageManager('scrollPanel', 'wordsPanel', wordItemLayout, renderWords);
+    pageManager = new PageManager('scrollPanel', 'itemsPanel', wordItemLayout, renderWords);
     $("#actionTitle").text("Mots");
     $("#search").show();
     $("#abort").hide();

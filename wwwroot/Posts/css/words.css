@@ -1,0 +1,15 @@
+#searchKey {
+    margin:0px !important;
+    padding-left:5px;
+    padding-bottom:5px;
+    padding-right: 10px;
+    height: 32px !important;
+    vertical-align: middle;
+}
+
+#search {
+    display:grid;
+    width: 190px;
+    grid-template-columns: 155px 30px;
+    align-items: center;
+}
