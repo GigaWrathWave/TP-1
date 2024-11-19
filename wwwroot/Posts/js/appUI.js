@@ -355,7 +355,7 @@ function renderPost(Post) {
                         <p class="PostCreation">${convertToFrenchDate(Post.Creation)}</p>
                     </div>
                     <br/>
-                    <span>${Post.Text}</span>
+                    <span class="paragraphe">${Post.Text}</span>
                 </div>
             </div>
             <div class="PostCommandPanel">
