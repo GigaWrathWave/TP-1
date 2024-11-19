@@ -191,7 +191,7 @@ async function renderDeletePostForm(id) {
         if (Post !== null) {
             $("#postForm").append(`
         <div class="PostdeleteForm">
-            <h4>Effacer le favori suivant?</h4>
+            <h4>Effacer le post suivant?</h4>
             <br>
             <div class="PostRow" id=${Post.Id}">
                 <div class="PostContainer noselect">
@@ -200,10 +200,12 @@ async function renderDeletePostForm(id) {
                             <span class="PostTitle">${Post.Title}</span>
                         </div>
                         <span class="PostCategory">${Post.Category}</span>
+                                            <div class="PostImage">
+                        <img src="${Post.Image}" width="400" height="400">
+                        <p class="PostCreation">${convertToFrenchDate(Post.Creation)}</p>
                     </div>
-                    <div class="PostCommandPanel">
-                        <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}" title="Modifier ${Post.Title}"></span>
-                        <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}" title="Effacer ${Post.Title}"></span>
+                    <br/>
+                    <span>${Post.Text}</span>
                     </div>
                 </div>
             </div>   
@@ -295,7 +297,7 @@ function renderPostForm(Post = null) {
             </div>
             <textarea
                 class="form-control Alpha"
-                name="Text" 
+                name="Text"
                 id="Text"
                 rows="10"
                 placeholder="Texte"
@@ -303,7 +305,8 @@ function renderPostForm(Post = null) {
                 RequireMessage="Veuillez entrer un texte"
                 InvalidMessage="Le texte comporte un caractère illégal"
                 value="${Post.Text}"
-            ></textarea>
+            >${Post.Text}
+            </textarea>
             <input
                 type="hidden"
                 id="Creation"
