@@ -305,8 +305,7 @@ function renderPostForm(Post = null) {
                 RequireMessage="Veuillez entrer un texte"
                 InvalidMessage="Le texte comporte un caractère illégal"
                 value="${Post.Text}"
-            >${Post.Text}
-            </textarea>
+            >${Post.Text}</textarea>
             <input
                 type="hidden"
                 id="Creation"
