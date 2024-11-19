@@ -25,7 +25,6 @@
     grid-template-columns: 1fr;
     padding: 10px;
     gap: 8px;
-    align-items: center;
     border: 1px black;
 }
 
@@ -60,4 +59,8 @@
 
 .PostdeleteForm {
     margin: 20px;
+}
+
+.PostImage {
+    text-align: center;
 }
