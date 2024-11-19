@@ -188,7 +188,6 @@ async function renderDeletePostForm(id) {
     let response = await Posts_API.Get(id)
     if (!Posts_API.error) {
         let Post = response.data;
-        let favicon = makeFavicon(Post.Url);
         if (Post !== null) {
             $("#postForm").append(`
         <div class="PostdeleteForm">
@@ -198,7 +197,6 @@ async function renderDeletePostForm(id) {
                 <div class="PostContainer noselect">
                     <div class="PostLayout">
                         <div class="Post">
-                            <a href="${Post.Url}" target="_blank"> ${favicon} </a>
                             <span class="PostTitle">${Post.Title}</span>
                         </div>
                         <span class="PostCategory">${Post.Category}</span>
@@ -260,15 +258,11 @@ function renderPostForm(Post = null) {
     let favicon = `<div class="big-favicon"></div>`;
     if (create)
         Post = newPost();
-    else
-        favicon = makeFavicon(Post.Url, true);
     $("#actionTitle").text(create ? "Création" : "Modification");
     $("#postForm").show();
     $("#postForm").empty();
     $("#postForm").append(`
         <form class="form" id="PostForm">
-            <a href="${Post.Url}" target="_blank" id="faviconLink" class="big-favicon" > ${favicon} </a>
-            <br>
             <input type="hidden" name="Id" value="${Post.Id}"/>
 
             <label for="Title" class="form-label">Titre </label>
@@ -300,7 +294,7 @@ function renderPostForm(Post = null) {
                 src="./image_placeholder.png"
                 required
                 RequireMessage="Veuillez entrer une image"
-                InvalidMessage="L'image comporte un caractère illégal"
+                InvalidMessage="L'image est invalide"
                 value="${Post.Image}"
             />
             <textarea
@@ -314,6 +308,11 @@ function renderPostForm(Post = null) {
                 InvalidMessage="Le texte comporte un caractère illégal"
                 value="${Post.Text}"
             ></textarea>
+            <input
+                type="hidden"
+                id="Creation"
+                value="${Post.Creation}"
+            />
             <br>
             <input type="submit" value="Enregistrer" id="savePost" class="btn btn-primary">
             <input type="button" value="Annuler" id="cancel" class="btn btn-secondary">
@@ -343,18 +342,7 @@ function renderPostForm(Post = null) {
         showPosts();
     });
 }
-function makeFavicon(url, big = false) {
-    // Utiliser l'API de google pour extraire le favicon du site pointé par url
-    // retourne un élément div comportant le favicon en tant qu'image de fond
-    ///////////////////////////////////////////////////////////////////////////
-    if (url.slice(-1) != "/") url += "/";
-    let faviconClass = "favicon";
-    if (big) faviconClass = "big-favicon";
-    url = "http://www.google.com/s2/favicons?sz=64&domain=" + url;
-    return `<div class="${faviconClass}" style="background-image: url('${url}');"></div>`;
-}
 function renderPost(Post) {
-    let favicon = makeFavicon(Post.Url);
     return $(`
      <div class="PostRow" id='${Post.Id}'>
         <div class="PostContainer noselect">
