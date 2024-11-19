@@ -9,7 +9,7 @@
     display: grid;
     grid-template-columns: 4fr 1fr;
     align-items: top;
-    background-color: #eee;
+    border: 1px black;
     border-radius: 6px;
 }
 
@@ -31,17 +31,24 @@
 
 .Post {
     display: grid;
-    grid-template-columns: 30px auto;
+    grid-template-rows: 30px auto;
 }
 
 .PostTitle {
     font-size: 1.1rem;
     font-weight: bold;
     color: black;
+    font-size: large;
 }
 
 .PostCategory {
     color: dodgerblue !important;
+    font-weight: bold;
+}
+
+.PostCreation {
+    color: rgb(171, 171, 171);
+    font-size: small;
 }
 
 .PostCommandPanel {

@@ -348,8 +348,11 @@ function renderPost(Post) {
                 <div class="Post">
                     <span class="PostCategory">${Post.Category}</span>
                     <span class="PostTitle">${Post.Title}</span>
-                    <img src="${Post.Image}" alt="Girl in a jacket" width="500" height="600">
+                    <div>
+                        <img src="${Post.Image}" width="300" height="400">
+                    </div>
                     <span class="PostCreation">${convertToFrenchDate(Post.Creation)}</span>
+                    <span>${Post.Text}</span>
                 </div>
             </div>
             <div class="PostCommandPanel">
