@@ -65,7 +65,7 @@ async function renderWords(queryString) {
     if (search != "") queryString += "&keywords=" + search;
     addWaitingGif();
     let endOfData = true;
-    let words = await API.getWords(queryString);
+    let words = await API.getItems(queryString);
     if (API.error)
         renderError(API.currentHttpError);
     else
