@@ -251,6 +251,7 @@ function newPost() {
     Post.Image = "";
     Post.Text = "";
     Post.Category = "";
+    Post.Creation = Date.now;
     return Post;
 }
 function renderPostForm(Post = null) {
@@ -359,8 +360,9 @@ function renderPost(Post) {
         <div class="PostContainer noselect">
             <div class="PostLayout">
                 <div class="Post">
-                    <a href="${Post.Url}" target="_blank"> ${favicon} </a>
                     <span class="PostTitle">${Post.Title}</span>
+                    <a href="${Post.Image}" target="_blank"> ${favicon} </a>
+                    <span class="PostCreation">${Post.Creation}</span>
                 </div>
                 <span class="PostCategory">${Post.Category}</span>
             </div>
@@ -372,3 +374,20 @@ function renderPost(Post) {
     </div>           
     `);
 }
+
+function convertToFrenchDate(numeric_date) {
+    date = new Date(numeric_date);
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    var opt_weekday = { weekday: 'long' };
+    var weekday = toTitleCase(date.toLocaleDateString("fr-FR", opt_weekday));
+
+        function toTitleCase(str) {
+            return str.replace(
+                /\w\S*/g,
+                function (txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                }
+            );
+        }
+        return weekday + " le " + date.toLocaleDateString("fr-FR", options) + " @ " + date.toLocaleTimeString("fr-FR");
+    }
