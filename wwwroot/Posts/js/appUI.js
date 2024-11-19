@@ -286,17 +286,13 @@ function renderPostForm(Post = null) {
                 InvalidMessage="Le titre comporte un caractère illégal"
                 value="${Post.Title}"
             />
-            <input 
-                class="form-control Alpha"
-                name="Image" 
-                id="Image"
-                type="asset"
-                src="./image_placeholder.png"
-                required
-                RequireMessage="Veuillez entrer une image"
-                InvalidMessage="L'image est invalide"
-                value="${Post.Image}"
-            />
+            <div   
+                class='imageUploader' 
+                newImage='${create}' 
+                controlId='Image' 
+                imageSrc='${Post.Image}' 
+                waitingImage="Loading_icon.gif">
+            </div>
             <textarea
                 class="form-control Alpha"
                 name="Text" 
@@ -319,6 +315,7 @@ function renderPostForm(Post = null) {
             <input type="button" value="Annuler" id="cancel" class="btn btn-secondary">
         </form>
     `);
+    initImageUploaders();
     initFormValidation();
     $("#Url").on("change", function () {
         let favicon = makeFavicon($("#Url").val(), true);
