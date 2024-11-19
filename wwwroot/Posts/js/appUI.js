@@ -246,7 +246,7 @@ function newPost() {
     Post = {};
     Post.Id = 0;
     Post.Title = "";
-    Post.Image = "";
+    Post.Image = "image_placeholder.png";
     Post.Text = "";
     Post.Category = "";
     Post.Creation = Date.now;
@@ -290,7 +290,7 @@ function renderPostForm(Post = null) {
                 class="form-control Alpha"
                 name="Image" 
                 id="Image"
-                type="file"
+                type="asset"
                 src="./image_placeholder.png"
                 required
                 RequireMessage="Veuillez entrer une image"
@@ -311,6 +311,7 @@ function renderPostForm(Post = null) {
             <input
                 type="hidden"
                 id="Creation"
+                name="Creation"
                 value="${Post.Creation}"
             />
             <br>
