@@ -249,7 +249,7 @@ function newPost() {
     Post.Image = "image_placeholder.png";
     Post.Text = "";
     Post.Category = "";
-    Post.Creation = Date.now;
+    Post.Creation = Date.now()
     return Post;
 }
 function renderPostForm(Post = null) {
