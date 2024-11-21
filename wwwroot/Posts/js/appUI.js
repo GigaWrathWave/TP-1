@@ -5,6 +5,8 @@ let currentETag = "";
 let hold_Periodic_Refresh = false;
 let pageManager;
 let itemLayout;
+let search = "";
+let endOfData = false;
 
 let waiting = null;
 let waitingGifTrigger = 2000;
@@ -37,6 +39,12 @@ async function Init_UI() {
     $('#aboutCmd').on("click", function () {
         renderAbout();
     });
+    $("#searchKey").on("change", () => {
+        doSearch();
+    })
+    $('#doSearch').on('click', () => {
+        doSearch();
+    })
     showPosts();
     start_Periodic_Refresh();
 }
@@ -47,11 +55,13 @@ function showPosts() {
     $('#postForm').hide();
     $('#aboutContainer').hide();
     $("#createPost").show();
+    $("#search").show();
     hold_Periodic_Refresh = false;
 }
 function hidePosts() {
     $("#scrollPanel").hide();
     $("#createPost").hide();
+    $("#search").hide();
     $("#abort").show();
     hold_Periodic_Refresh = true;
 }
@@ -67,6 +77,7 @@ function start_Periodic_Refresh() {
         }
     },
         periodicRefreshPeriod * 1000);
+
 }
 function renderAbout() {
     hidePosts();
@@ -128,6 +139,7 @@ async function compileCategories() {
     }
 }
 async function renderPosts(queryString) {
+    if (search != "") queryString += "&keywords=" + search;
     let endOfData = false;
     queryString += "&sort=category";
     if (selectedCategory != "") queryString += "&category=" + selectedCategory;
@@ -266,10 +278,8 @@ function renderPostForm(Post = null) {
     $("#postForm").append(`
         <form class="form" id="PostForm">
             <input type="hidden" name="Id" value="${Post.Id}"/>
-
-            <label for="Title" class="form-label">Titre </label>
             <input 
-                class="form-control Alpha"
+                class="form-control Alpha PostForm"
                 name="Category" 
                 id="Category" 
                 placeholder="Catégorie"
@@ -289,20 +299,22 @@ function renderPostForm(Post = null) {
                 value="${Post.Title}"
             />
             <div   
-                class='imageUploader' 
+                class='imageUploader PostForm' 
                 newImage='${create}' 
                 controlId='Image' 
                 imageSrc='${Post.Image}' 
                 waitingImage="Loading_icon.gif">
             </div>
+            </br>
             <textarea
                 class="form-control Alpha"
                 name="Text"
                 id="Text"
                 rows="10"
-                placeholder="Texte"
+                cols="100"
+                placeholder="Description"
                 required
-                RequireMessage="Veuillez entrer un texte"
+                RequireMessage="Veuillez entrer une descriotion"
                 InvalidMessage="Le texte comporte un caractère illégal"
                 value="${Post.Text}"
             >${Post.Text}</textarea>
@@ -346,22 +358,23 @@ function renderPost(Post) {
     return $(`
      <div class="PostRow" id='${Post.Id}'>
         <div class="PostContainer noselect">
+            <div class="PostHeader">
+                <span class="PostCategory">${Post.Category}</span>
+                <div class="PostCommandPanel">
+                    <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}" title="Modifier ${Post.Title}"></span>
+                    <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}" title="Effacer ${Post.Title}"></span>
+                </div>
+            </div>
             <div class="PostLayout">
                 <div class="Post">
-                    <span class="PostCategory">${Post.Category}</span>
                     <span class="PostTitle">${Post.Title}</span>
                     <div class="PostImage">
-                        <img src="${Post.Image}" width="400" height="400">
+                        <img src="${Post.Image}">
                         <p class="PostCreation">${convertToFrenchDate(Post.Creation)}</p>
                     </div>
                     <br/>
-                    <span class="paragraphe">${Post.Text}</span>
                 </div>
-                <hr>
-            </div>
-            <div class="PostCommandPanel">
-                <span class="editCmd cmdIcon fa fa-pencil" editPostId="${Post.Id}" title="Modifier ${Post.Title}"></span>
-                <span class="deleteCmd cmdIcon fa fa-trash" deletePostId="${Post.Id}" title="Effacer ${Post.Title}"></span>
+                <span class="paragraphe">${Post.Text}</span>
             </div>
         </div>
     </div>           
@@ -374,13 +387,18 @@ function convertToFrenchDate(numeric_date) {
     var opt_weekday = { weekday: 'long' };
     var weekday = toTitleCase(date.toLocaleDateString("fr-FR", opt_weekday));
 
-        function toTitleCase(str) {
-            return str.replace(
-                /\w\S*/g,
-                function (txt) {
-                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                }
-            );
-        }
-        return weekday + " le " + date.toLocaleDateString("fr-FR", options) + " @ " + date.toLocaleTimeString("fr-FR");
+    function toTitleCase(str) {
+        return str.replace(
+            /\w\S*/g,
+            function (txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
     }
+    return weekday + " le " + date.toLocaleDateString("fr-FR", options) + " @ " + date.toLocaleTimeString("fr-FR");
+}
+
+function doSearch() {
+    search = $("#searchKey").val().replace(' ', ',');
+    pageManager.reset();
+}

@@ -7,9 +7,10 @@
 }
 
 .PostContainer {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
     border-radius: 6px;
+    background-color: #eee;
 }
 
 .PostContainer .cmdIcon {
@@ -30,21 +31,22 @@
 
 .Post {
     display: grid;
-    grid-template-rows: 30px auto;
+    justify-content: center;
     gap: 20px
 }
 
 .PostTitle {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: black;
-    font-size: x-large;
+    text-align: center;
 }
 
 .PostCategory {
-    color: dodgerblue !important;
+    font-size: 2.1rem;
     font-weight: bold;
-    font-size: xx-large;
+    color: dodgerblue !important;
+    padding-left: 10px;
 }
 
 .PostCreation {
@@ -55,8 +57,9 @@
 .PostCommandPanel {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 8px;
+    height: 100%;
 }
 
 .PostdeleteForm {
@@ -68,5 +71,10 @@
 }
 
 .paragraphe {
-    width: 50%;
+    width: 100%;
+}
+
+.PostHeader {
+    display: grid;
+    grid-template-columns: 1fr auto;
 }
